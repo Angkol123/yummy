@@ -1,0 +1,15 @@
+import React from 'react';
+import Navbar from '../components/Navbar';
+
+const GeneralLayout = ({ children }) => {
+  return (
+    <div>
+      <Navbar />
+      <main className="p-6">
+        {children}
+      </main>
+    </div>
+  );
+};
+
+export default GeneralLayout;
