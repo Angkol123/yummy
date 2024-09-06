@@ -1,31 +1,76 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import AdminLayout from './layouts/AdminLayout';
 import GeneralLayout from './layouts/GeneralLayout';
-import Dashboard from './pages/admin/Dashboard';
-import Games from './pages/admin/Games';
-import Videos from './pages/admin/Videos';
-import LandingPage from './pages/general/LandingPage';
-import AboutUs from './pages/general/AboutUs';
-import Login from './pages/general/Login';
-import Register from './pages/general/Register';
+import ParentLayout from './layouts/ParentLayout';
+import Loader from './components/Loader'; // Loader component
+
+// Lazy load the pages
+const Dashboard = lazy(() => import('./pages/admin/Dashboard'));
+const Games = lazy(() => import('./pages/admin/Games'));
+const Videos = lazy(() => import('./pages/admin/Videos'));
+const ParentDashboard = lazy(() => import('./pages/parent/Dashboard'));
+const Feedback = lazy(() => import('./pages/parent/Feedback'));
+const LandingPage = lazy(() => import('./pages/general/LandingPage'));
+const AboutUs = lazy(() => import('./pages/general/AboutUs'));
+const Login = lazy(() => import('./pages/general/Login'));
+const Register = lazy(() => import('./pages/general/Register'));
+
+// Custom hook to track page changes and trigger loader
+const usePageLoader = () => {
+  const [loading, setLoading] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Trigger loader on route change
+    setLoading(true);
+
+    // Ensure loader stays for at least 1 second
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); // 1-second duration
+
+    return () => clearTimeout(timer); // Cleanup timeout on unmount or route change
+  }, [location]);
+
+  return loading;
+};
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        {/* General Pages */}
-        <Route path="/" element={<GeneralLayout><LandingPage /></GeneralLayout>} />
-        <Route path="/about" element={<GeneralLayout><AboutUs /></GeneralLayout>} />
-        <Route path="/login" element={<GeneralLayout><Login /></GeneralLayout>} />
-        <Route path="/register" element={<GeneralLayout><Register /></GeneralLayout>} />
-
-        {/* Admin Pages */}
-        <Route path="/admin/dashboard" element={<AdminLayout><Dashboard /></AdminLayout>} />
-        <Route path="/admin/games" element={<AdminLayout><Games /></AdminLayout>} />
-        <Route path="/admin/videos" element={<AdminLayout><Videos /></AdminLayout>} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <AppRoutes />
+      </Suspense>
     </Router>
+  );
+};
+
+// Separated component to handle routes and the loader logic
+const AppRoutes = () => {
+  const isLoading = usePageLoader(); // Check if loading state is active
+
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <Routes>
+      {/* General Pages */}
+      <Route path="/" element={<GeneralLayout><LandingPage /></GeneralLayout>} />
+      <Route path="/about" element={<GeneralLayout><AboutUs /></GeneralLayout>} />
+      <Route path="/login" element={<GeneralLayout><Login /></GeneralLayout>} />
+      <Route path="/register" element={<GeneralLayout><Register /></GeneralLayout>} />
+
+      {/* Admin Pages */}
+      <Route path="/admin" element={<Navigate to="/admin/dashboard" />} /> {/* Default to dashboard */}
+      <Route path="/admin/dashboard" element={<AdminLayout><Dashboard /></AdminLayout>} />
+      <Route path="/admin/games" element={<AdminLayout><Games /></AdminLayout>} />
+      <Route path="/admin/videos" element={<AdminLayout><Videos /></AdminLayout>} />
+
+      {/* Parent Pages */}
+      <Route path="/parent" element={<Navigate to="/parent/dashboard" />} /> {/* Default to parent dashboard */}
+      <Route path="/parent/dashboard" element={<ParentLayout><ParentDashboard /></ParentLayout>} />
+      <Route path="/parent/feedback" element={<ParentLayout><Feedback /></ParentLayout>} />
+    </Routes>
   );
 };
 
