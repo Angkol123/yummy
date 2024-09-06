@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <nav
-      className="bg-transparent p-7"
+      className="bg-transparent p-7 fixed top-0 left-0 w-full"
       style={{
         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         zIndex: 1000, // Ensure it is on top of other elements
