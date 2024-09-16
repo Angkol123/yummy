@@ -31,7 +31,7 @@ const AboutUs = () => {
           About Us
         </h1>
       </div>
-      
+
       <div className='bg-[#EBCEA8] w-[90%] h-auto p-9'>
         <div className='w-full h-auto flex flex-row gap-6 items-center'>
           <h1 className='text-[#5B3A29] freckle-face text-[1.8rem] w-[35%]'>
@@ -53,37 +53,38 @@ const AboutUs = () => {
         </div>
 
         <div className=' w-full h-[40vh] grid grid-rows-2 grid-cols-3  gap-8 justify-center py-5'>
-          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center'>
-          <img src={many} alt='bok' className='border border-[#EB9721] rounded-full'/>
+          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center' style={{ boxShadow: '6px 6px 8px rgba(0, 0, 0, 0.5), -4px -4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <img src={many} alt='bok' className='border border-[#EB9721] rounded-full' />
             <p>Early Reading Programs</p>
           </div>
-          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center'>
-          <img src={hand} alt='hand' className='border border-[#EB9721] rounded-full'/>
+          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center' style={{ boxShadow: '6px 6px 8px rgba(0, 0, 0, 0.5), -4px -4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <img src={hand} alt='hand' className='border border-[#EB9721] rounded-full' />
             <p>Writing Fundamentals</p>
           </div>
-          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center'>
-          <img src={symp} alt='hand1' className='border border-[#EB9721] rounded-full p-1'/>
-            <p>Interactive Learning
-</p>
+          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center' style={{ boxShadow: '6px 6px 8px rgba(0, 0, 0, 0.5), -4px -4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <img src={symp} alt='hand1' className='border border-[#EB9721] rounded-full p-1' />
+            <p>Interactive Learning</p>
           </div>
-          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center'>
-          <img src={kid} alt='hand1' className='border border-[#EB9721] rounded-full px-1'/>
+          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center' style={{ boxShadow: '6px 6px 8px rgba(0, 0, 0, 0.5), -4px -4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <img src={kid} alt='hand1' className='border border-[#EB9721] rounded-full px-1' />
             <p>Tailored for Young Learners</p>
           </div>
-          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center'>
-          <img src={teacher} alt='hand1' className='border border-[#EB9721] rounded-full p-1'/>
-            <p>Experienced Educators
-</p>
+          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center' style={{ boxShadow: '6px 6px 8px rgba(0, 0, 0, 0.5), -4px -4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <img src={teacher} alt='hand1' className='border border-[#EB9721] rounded-full p-1' />
+            <p>Experienced Educators</p>
           </div>
-          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center'>
-          <img src={confitte} alt='hand1' className='border border-[#EB9721] rounded-full p-1'/>
+          <div className='w-full h-full bg-white rounded-lg flex gap-2 items-center justify-center' style={{ boxShadow: '6px 6px 8px rgba(0, 0, 0, 0.5), -4px -4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <img src={confitte} alt='hand1' className='border border-[#EB9721] rounded-full p-1' />
             <p>Fun and Engaging Activities</p>
           </div>
+
         </div>
+        <div className='bg-red-600 w-full h-[50vh] rounded-lg'></div>
+
+        <div className="w-full h-64 bg-blue-500 rounded-b-[50%]"></div>
       </div>
     </div>
   );
 }
 
 export default AboutUs;
- 

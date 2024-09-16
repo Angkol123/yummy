@@ -1,0 +1,20 @@
+// middleware/authMiddleware.js
+const jwt = require('jsonwebtoken'); // Assuming you use JWT for authentication
+
+const authMiddleware = (req, res, next) => {
+  const token = req.header('Authorization')?.split(' ')[1]; // Extract Bearer token
+
+  if (!token) {
+    return res.status(401).json({ message: 'Auth required' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Verify the token
+    req.user = decoded.user; // Attach decoded user data to req
+    next(); // Continue to the next middleware/controller
+  } catch (err) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+};
+
+module.exports = authMiddleware;
